@@ -9,6 +9,7 @@ credentials.json
 
 ### data ###
 *.csv
+*/ny_taxi_postgres_data/*
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
