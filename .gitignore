@@ -7,6 +7,9 @@ credentials.json
 ### dotenv ###
 .env
 
+### data ###
+*.csv
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
