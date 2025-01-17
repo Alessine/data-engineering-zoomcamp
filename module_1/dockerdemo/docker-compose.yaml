@@ -1,4 +1,4 @@
-# Configuration to run all containers from one file
+# Configuration to build containers from one file
 services:
   pgdatabase:
     image: postgres:13
