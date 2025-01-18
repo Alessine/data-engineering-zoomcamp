@@ -57,3 +57,5 @@ GROUP BY
 	TRIP_DISTANCE_GROUP;
 ```
 This is the result:
+
+![query result for question 3](./module_1/homework/hw1_q3.png)
