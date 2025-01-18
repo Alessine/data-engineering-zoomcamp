@@ -34,7 +34,7 @@ During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusi
 - Over 10 miles
 
 <b>Answer:</b>
-This is the query that I used:
+Query:
 ```SQL
 SELECT
 	CASE
@@ -56,6 +56,35 @@ WHERE
 GROUP BY
 	TRIP_DISTANCE_GROUP;
 ```
-This is the result:
+Result:
 
 ![query result for question 3](./module_1/homework/hw1_q3.png)
+
+<b>Question 4. Longest trip for each day</b>
+
+Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
+
+Tip: For every day, we only care about one single trip with the longest distance.
+
+
+<b>Answer:</b>
+Query:
+```SQL
+SELECT
+	DATE_TRUNC('day', LPEP_PICKUP_DATETIME) AS DATE,
+	MAX(TRIP_DISTANCE) AS MAX_DISTANCE
+FROM
+	GREEN_TAXI_TRIPS
+WHERE
+	DATE_TRUNC('day', LPEP_PICKUP_DATETIME) BETWEEN '2019-10-01' AND '2019-10-31'
+GROUP BY
+	DATE_TRUNC('day', LPEP_PICKUP_DATETIME)
+ORDER BY
+	MAX_DISTANCE DESC
+LIMIT
+	1;
+```
+
+Result:
+
+![query result for question 3](./module_1/homework/hw1_q4.png)
