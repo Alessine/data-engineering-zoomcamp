@@ -1,33 +1,30 @@
 # Data Engineering Zoomcamp Cohort 2025
 
-## Description
-
-## Curriculum
-
-### Module 1: Docker, SQL, Terraform
-
-<details>
-<summary><h2>Homework</h2></summary>
+This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp).
 
 
-<b>Question 1. Understanding docker first run</b>
+## Module 1: Docker, SQL, Terraform
+
+### Homework
+
+<details><summary><b>Question 1. Understanding docker first run</b></summary>
 
 Run docker with the python:3.12.8 image in an interactive mode, use the entrypoint bash. What's the version of pip in the image?
 
 <b>Answer:</b>
 In bash: `docker run -it --entrypoint bash python:3.12.8` 
 The image will run locally. To check the version of pip: `pip --version`. It is version `24.3.1`.
+</details>
 
-
-<b>Question 2. Understanding Docker networking and docker-compose</b>
+<details><summary><b>Question 2. Understanding Docker networking and docker-compose</b></summary>
 
 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
 
 <b>Answer:</b>
 The container name with the postgres database is `postgres`, located at port `5432`, so the answer is `postgres:5432`.
+</details>
 
-
-<b>Question 3. Trip Segmentation Count</b>
+<details><summary><b>Question 3. Trip Segmentation Count</b></summary>
 
 During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusive), how many trips, respectively, happened:
 
@@ -63,9 +60,9 @@ GROUP BY
 Result:
 
 ![query result for question 3](./module_1/homework/hw1_q3.png)
+</details>
 
-
-<b>Question 4. Longest trip for each day</b>
+<details><summary><b>Question 4. Longest trip for each day</b></summary>
 
 Which was the pick up day with the longest trip distance? Use the pick up time for your calculations.
 
@@ -93,9 +90,9 @@ LIMIT
 Result:
 
 ![query result for question 4](./module_1/homework/hw1_q4.png)
+</details>
 
-
-<b>Question 5. Three biggest pickup zones</b>
+<details><summary><b>Question 5. Three biggest pickup zones</b></summary>
 
 Which were the top pickup locations with over 13,000 in total_amount (across all trips) for 2019-10-18?
 
@@ -126,9 +123,9 @@ WHERE
 Result:
 
 ![query result for question 5](./module_1/homework/hw1_q5.png)
+</details>
 
-
-<b>Question 6. Largest tip</b>
+<details><summary><b>Question 6. Largest tip</b></summary>
 
 For the passengers picked up in October 2019 in the zone name "East Harlem North" which was the drop off zone that had the largest tip?
 
@@ -159,5 +156,14 @@ LIMIT
 Result:
 
 ![query result for question 6](./module_1/homework/hw1_q6.png)
+</details>
+
+<details><summary><b>Question 7. Terraform Workflow</b></summary>
+
+Which of the following sequences, respectively, describes the workflow for:
+
+- Downloading the provider plugins and setting up backend,
+- Generating proposed changes and auto-executing the plan
+- Remove all resources managed by terraform`
 
 </details>
