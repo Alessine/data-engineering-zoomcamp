@@ -1,0 +1,33 @@
+## Network with both containers
+docker network create pg-network-hw1
+
+docker run -it \
+  -e POSTGRES_USER="root" \
+  -e POSTGRES_PASSWORD="root" \
+  -e POSTGRES_DB="ny_taxi" \
+  -v $(pwd)/ny_taxi_postgres_data:/var/lib/postgresql/data \
+  -p 5432:5432 \
+  --network=pg-network-hw1 \
+  --name pg-database-hw1 \
+  postgres:13
+
+docker run -it \
+  -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+  -e PGADMIN_DEFAULT_PASSWORD="root" \
+  -p 8080:80 \
+  --network=pg-network-hw1 \
+  --name pgadmin-hw1 \
+  dpage/pgadmin4
+
+## Upload the data
+URL="https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green"
+
+python ingest_data.py \
+  --user=root \
+  --password=root \
+  --host=localhost \
+  --port=5432 \
+  --db=ny_taxi \
+  --table_name=green_taxi_trips \
+  --zipped_file_name=green_tripdata_2019-10.csv.gz \
+  --url=${URL}
