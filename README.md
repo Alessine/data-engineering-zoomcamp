@@ -12,6 +12,7 @@ This repo contains all my materials, notes and homework for the [Data Engineerin
 Run docker with the python:3.12.8 image in an interactive mode, use the entrypoint bash. What's the version of pip in the image?
 
 <b>Answer:</b>
+
 In bash: `docker run -it --entrypoint bash python:3.12.8` 
 The image will run locally. To check the version of pip: `pip --version`. It is version `24.3.1`.
 </details>
@@ -21,6 +22,7 @@ The image will run locally. To check the version of pip: `pip --version`. It is 
 Given the following docker-compose.yaml, what is the hostname and port that pgadmin should use to connect to the postgres database?
 
 <b>Answer:</b>
+
 The container name with the postgres database is `postgres`, located at port `5432`, so the answer is `postgres:5432`.
 </details>
 
@@ -35,6 +37,7 @@ During the period of October 1st 2019 (inclusive) and November 1st 2019 (exclusi
 - Over 10 miles
 
 <b>Answer:</b>
+
 Query:
 ```SQL
 SELECT
@@ -70,6 +73,7 @@ Tip: For every day, we only care about one single trip with the longest distance
 
 
 <b>Answer:</b>
+
 Query:
 ```SQL
 SELECT
@@ -97,6 +101,8 @@ Result:
 Which were the top pickup locations with over 13,000 in total_amount (across all trips) for 2019-10-18?
 
 Consider only lpep_pickup_datetime when filtering by date.
+
+<b>Answer:</b>
 
 Query:
 ```SQL
@@ -133,6 +139,8 @@ Note: it's tip , not trip
 
 We need the name of the zone, not the ID.
 
+<b>Answer:</b>
+
 Query:
 ```SQL
 SELECT
@@ -165,5 +173,17 @@ Which of the following sequences, respectively, describes the workflow for:
 - Downloading the provider plugins and setting up backend,
 - Generating proposed changes and auto-executing the plan
 - Remove all resources managed by terraform`
+
+<b>Answer:</b>
+
+The required file is [here](./module_1/homework/main.tf).
+
+The bash commands for the described workflow are the following:
+
+```bash
+$ terraform init
+$ terraform apply -auto-approve
+$ terraform destroy
+```
 
 </details>
