@@ -5,6 +5,9 @@ This repo contains all my materials, notes and homework for the [Data Engineerin
 
 ## Module 1: Docker, SQL, Terraform
 
+### Learning in Public
+I documented my learning in a [Medium article](https://medium.com/@angelaniederberger/e5282f6f9d1b).
+
 ### Homework
 
 <details><summary><b>Question 1. Understanding docker first run</b></summary>
