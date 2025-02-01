@@ -1,0 +1,103 @@
+# Set Keys and Values for GCP
+
+id: gcp_keyvaluestore
+namespace: zoomcamp
+
+tasks:
+  - id: gcp_creds
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_CREDS
+    kvType: JSON
+    value: |
+      {
+        "type": "service_account",
+        "project_id": "dez-2025",
+        # Add Credentials Here
+      }
+  - id: gcp_project_id
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_PROJECT_ID
+    kvType: STRING
+    value: dez-2025
+  - id: gcp_location
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_LOCATION
+    kvType: STRING
+    value: europe-west6
+  - id: gcp_bucket_name
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_BUCKET_NAME
+    kvType: STRING
+    value: taxi-data-files
+  - id: gcp_dataset
+    type: io.kestra.plugin.core.kv.Set
+    key: GCP_DATASET
+    kvType: STRING
+    value: taxi_data
+
+
+# Set up GCP Recources
+
+id: gcp_setup
+namespace: zoomcamp
+
+tasks:
+  - id: create_gcs_bucket
+    type: io.kestra.plugin.gcp.gcs.CreateBucket
+    ifExists: SKIP
+    storageClass: REGIONAL
+    name: "{{kv('GCP_BUCKET_NAME')}}"
+
+  - id: create_bq_dataset
+    type: io.kestra.plugin.gcp.bigquery.CreateDataset
+    ifExists: SKIP
+    name: "{{kv('GCP_DATASET')}}"
+
+pluginDefaults:
+  - type: io.kestra.plugin.gcp
+    values:
+      serviceAccount: "{{kv('GCP_CREDS')}}"
+      projectId: "{{kv('GCP_PROJECT_ID')}}"
+      location: "{{kv('GCP_LOCATION')}}"
+      bucket: "{{kv('GCP_BUCKET_NAME')}}"
+
+
+# Load the Data
+
+id: gcp_taxi_data
+namespace: zoomcamp
+
+inputs:
+  - id: taxi
+    type: SELECT
+    displayName: Select taxi type
+    values: [yellow, green]
+    defaults: green
+
+  - id: year
+    type: SELECT
+    displayName: Select year
+    values: ["2019", "2020"]
+    defaults: "2019"
+    allowCustomValue: true
+
+  - id: month
+    type: SELECT
+    displayName: Select month
+    values: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    defaults: "01"
+
+variables:
+  file: "{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv"
+  gcs_file: "gs://{{kv('GCP_BUCKET_NAME')}}/{{vars.file}}"
+  table: "{{kv('GCP_DATASET')}}.{{inputs.taxi}}_tripdata_{{inputs.year}}_{{inputs.month}}"
+  data: "{{outputs.extract.outputFiles[inputs.taxi - '_tripdata_' - inputs.year - '-' - inputs.month - '.csv']}}"
+
+tasks:
+  - id: set_label
+    type: io.kestra.plugin.core.execution.Labels
+    labels:
+      file: "{{render(vars.file)}}"
+      taxi: "{{inputs.taxi}}"
+
+    
