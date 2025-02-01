@@ -190,3 +190,71 @@ $ terraform destroy
 ```
 
 </details>
+
+
+## Module 2: Orchestration with Kestra
+
+### Learning in Public
+I'm documenting my learning in a Medium article - coming soon.
+
+### Homework
+
+<details><summary><b>Question 1. File Size</b></summary>
+
+Within the execution for `Yellow` Taxi data for the year `2020` and month `12`: what is the uncompressed file size (i.e. the output file `yellow_tripdata_2020-12.csv` of the extract task)?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
+
+<details><summary><b>Question 2. Rendered Value</b></summary>
+
+What is the rendered value of the variable file when the inputs taxi is set to green, year is set to 2020, and month is set to 04 during execution?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
+
+<details><summary><b>Question 3. Number of rows (yellow, 2020)</b></summary>
+
+How many rows are there for the `Yellow` Taxi data for all CSV files in the year 2020?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
+
+<details><summary><b>Question 4. Number of rows (green, 2020)</b></summary>
+
+How many rows are there for the `Green` Taxi data for all CSV files in the year 2020?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
+
+<details><summary><b>Question 5. Number of rows (yellow, March 2021)</b></summary>
+
+How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
+
+<details><summary><b>Question 6. Timezone for trigger</b></summary>
+
+How would you configure the timezone to New York in a Schedule trigger?
+
+<b>Answer:</b>
+
+Answer will go here.
+
+</details>
