@@ -211,11 +211,13 @@ Answer will go here.
 
 <details><summary><b>Question 2. Rendered Value</b></summary>
 
-What is the rendered value of the variable file when the inputs taxi is set to green, year is set to 2020, and month is set to 04 during execution?
+What is the rendered value of the variable `file` when the inputs `taxi` is set to `green`, `year` is set to `2020`, and `month` is set to `04` during execution?
 
 <b>Answer:</b>
 
-Answer will go here.
+The variable `file` is defined as follows: `"{{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv"`. When rendered with the specified inputs, this generates the value `green_tripdata_2020-04.csv`. This is also visible in the GCS Bucket: 
+
+![file names in the GCS Bucket](./module_2/homework/hw2_q2.png)
 
 </details>
 
@@ -235,8 +237,19 @@ How many rows are there for the `Green` Taxi data for all CSV files in the year 
 
 <b>Answer:</b>
 
-Answer will go here.
+Query:
+```SQL
+SELECT
+  COUNT(*) AS row_count
+FROM
+  `dez-2025.taxi_data.green_tripdata`
+WHERE
+  filename LIKE "%2020%";
+```
 
+Result:
+
+![query result for question 4](./module_2/homework/hw2_q4.png)
 </details>
 
 <details><summary><b>Question 5. Number of rows (yellow, March 2021)</b></summary>
@@ -255,6 +268,7 @@ How would you configure the timezone to New York in a Schedule trigger?
 
 <b>Answer:</b>
 
-Answer will go here.
+In the [Kestra Documentation on Schedule Triggers](https://kestra.io/docs/workflow-components/triggers/schedule-trigger) we can find the following information:
 
+![query result for question 4](./module_2/homework/hw2_q6.png)
 </details>
