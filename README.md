@@ -205,7 +205,9 @@ Within the execution for `Yellow` Taxi data for the year `2020` and month `12`: 
 
 <b>Answer:</b>
 
-Answer will go here.
+In the GCS Bucket I can see that the uncompressed file size for the specified file is 128.3 MB.
+
+![file sizes in the GCS Bucket](./module_2/homework/hw2_q1.png)
 
 </details>
 
@@ -227,8 +229,18 @@ How many rows are there for the `Yellow` Taxi data for all CSV files in the year
 
 <b>Answer:</b>
 
-Answer will go here.
+Query:
+```SQL
+SELECT
+  COUNT(*) AS row_count
+FROM
+  `dez-2025.taxi_data.yellow_tripdata`
+WHERE
+  filename LIKE "%2020%";
+```
+Result:
 
+![query result for question 3](./module_2/homework/hw2_q3.png)
 </details>
 
 <details><summary><b>Question 4. Number of rows (green, 2020)</b></summary>
@@ -258,7 +270,19 @@ How many rows are there for the `Yellow` Taxi data for the March 2021 CSV file?
 
 <b>Answer:</b>
 
-Answer will go here.
+Query:
+```SQL
+SELECT
+  COUNT(*) AS row_count
+FROM
+  `dez-2025.taxi_data.yellow_tripdata`
+WHERE
+  filename = "yellow_tripdata_2021-03.csv";
+```
+
+Result:
+
+![query result for question 4](./module_2/homework/hw2_q5.png)
 
 </details>
 
@@ -270,5 +294,5 @@ How would you configure the timezone to New York in a Schedule trigger?
 
 In the [Kestra Documentation on Schedule Triggers](https://kestra.io/docs/workflow-components/triggers/schedule-trigger) we can find the following information:
 
-![query result for question 4](./module_2/homework/hw2_q6.png)
+![Screenshot from the kestra documentation](./module_2/homework/hw2_q6.png)
 </details>
