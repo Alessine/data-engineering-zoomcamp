@@ -1,6 +1,6 @@
 # Set Keys and Values for GCP
 
-id: gcp_keyvaluestore
+id: 01_gcp_keyvaluestore
 namespace: zoomcamp
 
 tasks:
@@ -38,7 +38,7 @@ tasks:
 
 # Set up GCP Recources
 
-id: gcp_setup
+id: 02_gcp_setup
 namespace: zoomcamp
 
 tasks:
@@ -64,7 +64,7 @@ pluginDefaults:
 
 # Load the Data
 
-id: gcp_taxi_data
+id: 03_gcp_taxi_data
 namespace: zoomcamp
 
 inputs:
