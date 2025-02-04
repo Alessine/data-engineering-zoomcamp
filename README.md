@@ -195,7 +195,7 @@ $ terraform destroy
 ## Module 2: Orchestration with Kestra
 
 ### Learning in Public
-I'm documenting my learning in a Medium article - coming soon.
+I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-orchestration-with-kestra-0ec485da063e).
 
 ### Homework
 
