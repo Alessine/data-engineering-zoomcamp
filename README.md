@@ -366,9 +366,11 @@ Result:
 As shown in the screenshots below, BigQuery gives an accurate estimate for the materialized table (155 MB), but cannot generate an estimate for the data processed when querying the external table, because the data is not stored in BigQuery.
 
 Materialized table:
+
 ![estimated bytes processed - materialized table](./module_3/homework/hw3_q2_1.png)
 
 External table:
+
 ![estimated bytes processed - external table](./module_3/homework/hw3_q2_2.png)
 
 </details>
@@ -378,6 +380,7 @@ External table:
 Write a query to retrieve the PULocationID from the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table. Why are the estimated number of Bytes different?
 
 <b>Answer:</b>
+
 Data storage in BigQuery is columnar (rather than row-oriented). This means that querying additional columns adds to the data volume. BigQuery only needs to retrieve the rows from those columns that are explicitly selected.
 
 </details>
@@ -408,6 +411,7 @@ Result:
 What is the best strategy to make an optimized table in Big Query if your query will always filter based on tpep_dropoff_datetime and order the results by VendorID (Create a new table with this strategy)
 
 <b>Answer:</b>
+
 Partitioning can reduce the bytes processed when filtering on the partitioned column. Clustering orders the records by the selected column. Therefore, for the type of queries described, it would be most appropriate to partition by `tpep_dropoff_datetime` and cluster on the `VendorID`.
 
 Query:
@@ -447,7 +451,12 @@ WHERE
 
 Result:
 
+Without partitioning:
+
 ![estimated bytes without partitioning](./module_3/homework/hw3_q6_1.png)
+
+With partitioning:
+
 ![estimated bytes with partitioning](./module_3/homework/hw3_q6_2.png)
 
 </details>
@@ -457,6 +466,7 @@ Result:
 Where is the data stored in the External Table you created?
 
 <b>Answer:</b>
+
 The data is stored in the parquet files in the GCS Bucket. For external tables, BigQuery only provides the interface to explore the data.
 
 </details>
@@ -466,6 +476,9 @@ The data is stored in the parquet files in the GCS Bucket. For external tables, 
 It is best practice in Big Query to always cluster your data.
 
 <b>Answer:</b>
+
+False.
+
 Clustering can help improve especially filter and aggregate queries. Clusters are particularly helpful for columns with high cardinality (many distinct values). However, they also need to be maintained (via automatic re-clustering) and if the amount of data is small (< 1 GB) it is not advisable to cluster the table.
 
 </details>
