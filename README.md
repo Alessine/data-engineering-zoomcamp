@@ -296,3 +296,198 @@ In the [Kestra Documentation on Schedule Triggers](https://kestra.io/docs/workfl
 
 ![Screenshot from the kestra documentation](./module_2/homework/hw2_q6.png)
 </details>
+
+
+## Module 3: Data Warehouse
+
+### Learning in Public
+I'm documenting my learning in a Medium article (coming soon).
+
+### Homework
+
+Queries used for setting up the tables:
+
+External Table:
+```SQL
+CREATE OR REPLACE EXTERNAL TABLE
+  `dez-2025.taxi_data.yellow_tripdata_2024_external` 
+OPTIONS ( 
+  format = 'PARQUET',
+  uris = ['gs://taxi-data-files/yellow_tripdata_2024-*.parquet'] 
+  );
+```
+
+Materialized Table:
+```SQL
+CREATE OR REPLACE TABLE
+  `dez-2025.taxi_data.yellow_tripdata_2024` AS (
+  SELECT
+    *
+  FROM
+    `dez-2025.taxi_data.yellow_tripdata_2024_external`);
+```
+
+<details><summary><b>Question 1. Count of records for the 2024 Yellow Taxi Data</b></summary>
+
+What is the count of records for the 2024 Yellow Taxi Data?
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+  COUNT(*) AS row_count
+FROM
+  `dez-2025.taxi_data.yellow_tripdata_2024`;
+```
+
+Result:
+
+![number of rows in the dataset](./module_3/homework/hw3_q1.png)
+</details>
+
+<details><summary><b>Question 2. Estimated amount of data</b></summary>
+
+Write a query to count the distinct number of PULocationIDs for the entire dataset on both the tables.
+What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+  COUNT(DISTINCT PULocationID) AS pu_location_count
+FROM
+  `dez-2025.taxi_data.yellow_tripdata_2024`;
+```
+
+Result:
+
+As shown in the screenshots below, BigQuery gives an accurate estimate for the materialized table (155 MB), but cannot generate an estimate for the data processed when querying the external table, because the data is not stored in BigQuery.
+
+Materialized table:
+![estimated bytes processed - materialized table](./module_3/homework/hw3_q2_1.png)
+
+External table:
+![estimated bytes processed - external table](./module_3/homework/hw3_q2_2.png)
+
+</details>
+
+<details><summary><b>Question 3. Why are the estimated number of Bytes different?</b></summary>
+
+Write a query to retrieve the PULocationID from the table (not the external table) in BigQuery. Now write a query to retrieve the PULocationID and DOLocationID on the same table. Why are the estimated number of Bytes different?
+
+<b>Answer:</b>
+Data storage in BigQuery is columnar (rather than row-oriented). This means that querying additional columns adds to the data volume. BigQuery only needs to retrieve the rows from those columns that are explicitly selected.
+
+</details>
+
+<details><summary><b>Question 4. How many records have a fare_amount of 0?</b></summary>
+
+How many records have a fare_amount of 0?
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+  COUNTIF(fare_amount = 0) AS trips_without_fare,
+  COUNT(*) AS all_trips,
+  COUNTIF(fare_amount = 0) / COUNT(*) * 100 AS perc_without_fare
+FROM
+  `dez-2025.taxi_data.yellow_tripdata_2024`;
+```
+
+Result:
+
+![amount of trips without a fare](./module_3/homework/hw3_q4.png)
+</details>
+
+<details><summary><b>Question 5. The best strategy to make an optimized table in Big Query</b></summary>
+
+What is the best strategy to make an optimized table in Big Query if your query will always filter based on tpep_dropoff_datetime and order the results by VendorID (Create a new table with this strategy)
+
+<b>Answer:</b>
+Partitioning can reduce the bytes processed when filtering on the partitioned column. Clustering orders the records by the selected column. Therefore, for the type of queries described, it would be most appropriate to partition by `tpep_dropoff_datetime` and cluster on the `VendorID`.
+
+Query:
+```SQL
+CREATE OR REPLACE TABLE
+  `dez-2025.taxi_data.yellow_tripdata_2024_partitioned_clustered`
+PARTITION BY
+  TIMESTAMP_TRUNC(tpep_dropoff_datetime, DAY)
+CLUSTER BY
+  VendorID AS (
+  SELECT
+    *
+  FROM
+    `dez-2025.taxi_data.yellow_tripdata_2024`);
+```
+
+</details>
+
+<details><summary><b>Question 6. Estimated processed bytes</b></summary>
+
+Write a query to retrieve the distinct VendorIDs between tpep_dropoff_datetime 2024-03-01 and 2024-03-15 (inclusive)
+
+Use the materialized table you created earlier in your from clause and note the estimated bytes. Now change the table in the from clause to the partitioned table you created for question 5 and note the estimated bytes processed. What are these values? 
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+  DISTINCT VendorID
+FROM
+  `dez-2025.taxi_data.yellow_tripdata_2024_partitioned_clustered`
+WHERE
+  tpep_dropoff_datetime BETWEEN '2024-03-01'
+  AND '2024-03-15'; 
+```
+
+Result:
+
+![estimated bytes without partitioning](./module_3/homework/hw3_q6_1.png)
+![estimated bytes with partitioning](./module_3/homework/hw3_q6_2.png)
+
+</details>
+
+<details><summary><b>Question 7. Where is the data for external tables stored?</b></summary>
+
+Where is the data stored in the External Table you created?
+
+<b>Answer:</b>
+The data is stored in the parquet files in the GCS Bucket. For external tables, BigQuery only provides the interface to explore the data.
+
+</details>
+
+<details><summary><b>Question 8. Always clustering</b></summary>
+
+It is best practice in Big Query to always cluster your data.
+
+<b>Answer:</b>
+Clustering can help improve especially filter and aggregate queries. Clusters are particularly helpful for columns with high cardinality (many distinct values). However, they also need to be maintained (via automatic re-clustering) and if the amount of data is small (< 1 GB) it is not advisable to cluster the table.
+
+</details>
+
+<details><summary><b>Question 9. Bytes read in SELECT COUNT(*)</b></summary>
+
+Write a SELECT count(*) query FROM the materialized table you created. How many bytes does it estimate will be read? Why?
+
+<b>Answer:</b>
+
+The estimate is 0, because the result of this query was cached when I previously ran it for question 1.
+
+Query:
+```SQL
+SELECT
+  COUNT(*)
+FROM
+  `dez-2025.taxi_data.yellow_tripdata_2024` ;
+```
+
+Result:
+
+![estimated bytes queried](./module_3/homework/hw3_q9.png)
+
+</details>
