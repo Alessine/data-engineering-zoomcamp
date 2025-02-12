@@ -301,7 +301,7 @@ In the [Kestra Documentation on Schedule Triggers](https://kestra.io/docs/workfl
 ## Module 3: Data Warehouse
 
 ### Learning in Public
-I'm documenting my learning in a Medium article (coming soon).
+I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-data-warehouse-and-bigquery-58ceb162edd4).
 
 ### Homework
 
