@@ -1,0 +1,41 @@
+with 
+
+source as (
+
+    select * from {{ source('staging', 'green_tripdata') }}
+
+),
+
+renamed as (
+
+    select
+        vendorid,
+        lpep_pickup_datetime,
+        lpep_dropoff_datetime,
+        passenger_count,
+        trip_distance,
+        ratecodeid,
+        store_and_fwd_flag,
+        payment_type,
+        fare_amount,
+        extra,
+        mta_tax,
+        tip_amount,
+        tolls_amount,
+        ehail_fee,
+        improvement_surcharge,
+        airport_fee,
+        total_amount,
+        distance_between_service,
+        time_between_service,
+        trip_type,
+        pulocationid,
+        dolocationid,
+        data_file_year,
+        data_file_month
+
+    from source
+
+)
+
+select * from renamed
