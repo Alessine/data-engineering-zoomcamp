@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        {{ dbt_utils.generate_surrogate_key(['vendorid', 'lpep_pickup_datetime']) }} as tripid,
         vendorid,
         lpep_pickup_datetime,
         lpep_dropoff_datetime,
@@ -17,6 +18,7 @@ renamed as (
         ratecodeid,
         store_and_fwd_flag,
         payment_type,
+        {{ get_payment_type_description('payment_type') }} as payment_type_description,
         fare_amount,
         extra,
         mta_tax,
