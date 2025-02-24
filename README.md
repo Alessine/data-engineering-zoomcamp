@@ -553,3 +553,28 @@ from myproject.raw_nyc_tripdata.ext_green_taxi
 ```
 
 </details>
+
+<details><summary><b>Question 2. dbt Variables & Dynamic Models</b></summary>
+
+Say you have to modify the following dbt_model (`fct_recent_taxi_trips.sql`) to enable Analytics Engineers to dynamically control the date range.
+
+<ul>
+    <li>In development, you want to process only the last 7 days of trips</li>
+    <li>In production, you need to process the last 30 days for analytics</li>
+</ul>
+
+```SQL
+select *
+from {{ ref('fact_taxi_trips') }}
+where pickup_datetime >= CURRENT_DATE - INTERVAL '30' DAY
+```
+
+What would you change to accomplish that in a such way that command line arguments takes precedence over ENV_VARs, which takes precedence over DEFAULT value?
+
+<b>Answer:</b>
+The variables would need to be nested inside the Jinja macro in the following way: `{{ CLI var("var", ENV var("VAR", default)) }}`. The correct answer is therefore:
+
+Update the WHERE clause to `pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY`.
+
+
+</details>
