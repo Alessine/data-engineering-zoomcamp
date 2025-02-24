@@ -8,6 +8,7 @@
 .env
 
 ### data ###
+module_1/*/*.csv
 *.gz
 */ny_taxi_postgres_data/*
 
