@@ -685,3 +685,62 @@ These are the best and worst results for green and yellow cabs:
 <li>green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}</li>
 </ul>
 </details>
+
+<details><summary><b>Question 6. P97/P95/P90 Taxi Monthly Fare</b></summary>
+
+<ol>
+    <li>Create a new model <code>fct_taxi_trips_monthly_fare_p95.sql</code></li>
+    <li>Filter out invalid entries (fare_amount > 0, trip_distance > 0, and payment_type_description in ('Cash', 'Credit Card'))</li>
+    <li>Compute the <b>continous percentile</b> of <code>fare_amount</code> partitioning by service_type, year and and month</li>
+</ol>
+
+Now, what are the values of p97, p95, p90 for Green Taxi and Yellow Taxi, in April 2020?
+
+<b>Answer:</b>
+
+The file with the new model for the `fare_amount` percentiles is [here](module_4/homework/models/core/fct_taxi_trips_monthly_fare_p95.sql).
+
+Query:
+```SQL
+WITH
+  prep AS (
+  SELECT
+    service_type,
+    year,
+    month,
+    PERCENTILE_CONT(fare_amount, 0.97) OVER(PARTITION BY service_type, year, month) AS p97,
+    PERCENTILE_CONT(fare_amount, 0.95) OVER(PARTITION BY service_type, year, month) AS p95,
+    PERCENTILE_CONT(fare_amount, 0.90) OVER(PARTITION BY service_type, year, month) AS p90
+  FROM
+    `dez-2025.taxi_data_prod.fact_trips`
+  WHERE
+    fare_amount > 0
+    AND trip_distance > 0
+    AND payment_type_description IN ('Cash',
+      'Credit card'))
+SELECT
+  service_type,
+  year,
+  month,
+  MAX(p97) AS P97,
+  MAX(p95) AS P95,
+  MAX(p90) AS P90,
+FROM
+  prep
+WHERE
+  year = 2020
+  AND month = 4
+GROUP BY
+  service_type,
+  year,
+  month;
+```
+
+I'm getting the following output:
+![percentile query output](./module_4/homework/hw4_q6.png)
+
+This is closest to this option from the homework assignment:
+<ul>
+<li>green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}</li>
+</ul>
+</details>
