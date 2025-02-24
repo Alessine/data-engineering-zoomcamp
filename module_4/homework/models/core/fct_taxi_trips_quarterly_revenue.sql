@@ -11,6 +11,7 @@ with
                 partition by service_type order by year_quarter
             ) as prev_year_revenue
         from trips_data
+        where year in (2019, 2020)
         group by service_type, year_quarter
     )
 select *, (safe_divide(quarterly_revenue, prev_year_revenue) - 1) * 100 as yoy_growth
