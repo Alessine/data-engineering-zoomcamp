@@ -643,14 +643,14 @@ The following statements are therefore true:
 <details><summary><b>Question 5. Taxi Quarterly Revenue Growth</b></summary>
 
 <ol>
-    * Create a new model `fct_taxi_trips_quarterly_revenue.sql`
-    * Compute the Quarterly Revenues for each year for based on total_amount
-    * Compute the Quarterly YoY (Year-over-Year) revenue growth
+    <li>Create a new model `fct_taxi_trips_quarterly_revenue.sql`</li>
+    <li>Compute the Quarterly Revenues for each year for based on total_amount</li>
+    <li>Compute the Quarterly YoY (Year-over-Year) revenue growth</li>
 </ol>
 
 <ul>
-    * e.g.: In 2020/Q1, Green Taxi had -12.34% revenue growth compared to 2019/Q1
-    * e.g.: In 2020/Q4, Yellow Taxi had +34.56% revenue growth compared to 2019/Q4
+    <li>e.g.: In 2020/Q1, Green Taxi had -12.34% revenue growth compared to 2019/Q1</li>
+    <li>e.g.: In 2020/Q4, Yellow Taxi had +34.56% revenue growth compared to 2019/Q4</li>
 </ul>
 
 Considering the YoY Growth in 2020, which were the yearly quarters with the best (or less worse) and worst results for green, and yellow
@@ -663,7 +663,7 @@ Query:
 ```SQL
 SELECT
   *,
-  (quarterly_revenue/prev_year_revenue-1)*100 AS yoy_growth
+  (SAFE_DIVIDE(quarterly_revenue, prev_year_revenue)-1)*100 AS yoy_growth
 FROM (
   SELECT
     year_quarter,
@@ -680,11 +680,8 @@ FROM (
     year_quarter)
 ```
 
-The following statements are therefore true:
+These are the best and worst results for green and yellow cabs:
 <ul>
-	<li>Setting a value for <code>DBT_BIGQUERY_TARGET_DATASET</code> env var is mandatory, or it'll fail to compile</li>
-	<li>When using <code>core</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
-	<li>When using <code>stg</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_STAGING_DATASET</code>, or defaults to <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
+<li>green: {best: 2020/Q1, worst: 2020/Q2}, yellow: {best: 2020/Q1, worst: 2020/Q2}</li>
 </ul>
-
 </details>
