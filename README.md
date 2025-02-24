@@ -576,5 +576,19 @@ The variables would need to be nested inside the Jinja macro in the following wa
 
 Update the WHERE clause to `pickup_datetime >= CURRENT_DATE - INTERVAL '{{ var("days_back", env_var("DAYS_BACK", "30")) }}' DAY`.
 
+</details>
+
+<details><summary><b>Question 3. dbt Data Lineage and Execution</b></summary>
+
+Considering the data lineage below and that `taxi_zone_lookup` is the only materialization build (from a .csv seed file):
+
+![data lineage diagram](./module_4/homework/homework_q2.png)
+
+Select the option that does NOT apply for materializing `fct_taxi_monthly_zone_revenue`.
+
+<b>Answer:</b>
+Out of the given options, only the one that specifies the staging folder would not apply for materializing `fct_taxi_monthly_zone_revenue`, because the table `dim_zone_lookup` would not get built, since it is not downstream from the models in the staging folder. The correct answer is therefore:
+
+`dbt run --select models/staging/+`
 
 </details>
