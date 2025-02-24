@@ -639,3 +639,52 @@ The following statements are therefore true:
 </ul>
 
 </details>
+
+<details><summary><b>Question 5. Taxi Quarterly Revenue Growth</b></summary>
+
+<ol>
+    * Create a new model `fct_taxi_trips_quarterly_revenue.sql`
+    * Compute the Quarterly Revenues for each year for based on total_amount
+    * Compute the Quarterly YoY (Year-over-Year) revenue growth
+</ol>
+
+<ul>
+    * e.g.: In 2020/Q1, Green Taxi had -12.34% revenue growth compared to 2019/Q1
+    * e.g.: In 2020/Q4, Yellow Taxi had +34.56% revenue growth compared to 2019/Q4
+</ul>
+
+Considering the YoY Growth in 2020, which were the yearly quarters with the best (or less worse) and worst results for green, and yellow
+
+<b>Answer:</b>
+
+The file with the new model for YoY Growth is [here](module_4/homework/models/core/fct_taxi_trips_quarterly_revenue.sql).
+
+Query:
+```SQL
+SELECT
+  *,
+  (quarterly_revenue/prev_year_revenue-1)*100 AS yoy_growth
+FROM (
+  SELECT
+    year_quarter,
+    service_type,
+    SUM(total_amount) AS quarterly_revenue,
+    LAG(SUM(total_amount), 4) OVER(PARTITION BY service_type ORDER BY year_quarter) AS prev_year_revenue,
+  FROM
+    `dez-2025.taxi_data_prod.fact_trips`
+  WHERE
+    year IN (2019,
+      2020)
+  GROUP BY
+    service_type,
+    year_quarter)
+```
+
+The following statements are therefore true:
+<ul>
+	<li>Setting a value for <code>DBT_BIGQUERY_TARGET_DATASET</code> env var is mandatory, or it'll fail to compile</li>
+	<li>When using <code>core</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
+	<li>When using <code>stg</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_STAGING_DATASET</code>, or defaults to <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
+</ul>
+
+</details>
