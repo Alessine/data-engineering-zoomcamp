@@ -40,12 +40,8 @@ models:
       # Applies to all files under models/.../
       staging:
           materialized: view
-          database: "{{ env_var('DBT_DATABASE', 'dez-2025') }}"
-          schema: "{{ env_var('DBT_TARGET_SCHEMA', 'taxi_data_dev') }}"
       core:
           materialized: table
-          database: "{{ env_var('DBT_DATABASE', 'dez-2025') }}"
-          schema: "{{ env_var('DBT_TARGET_SCHEMA', 'taxi_data_dev') }}"
 vars:
   payment_type_values: [1, 2, 3, 4, 5, 6]
 
