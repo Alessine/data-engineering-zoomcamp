@@ -13,5 +13,5 @@ with
         from trips_data
         group by service_type, year_quarter
     )
-select *, (quarterly_revenue / prev_year_revenue - 1) * 100 as yoy_growth
+select *, (safe_divide(quarterly_revenue, prev_year_revenue) - 1) * 100 as yoy_growth
 from prep
