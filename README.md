@@ -504,3 +504,52 @@ Result:
 ![estimated bytes queried](./module_3/homework/hw3_q9.png)
 
 </details>
+
+## Module 4: Analytics Engineering
+
+### Learning in Public
+I'm documenting my learning in a Medium article (coming soon).
+
+### Homework
+
+<details><summary><b>Question 1. Understanding dbt model resolution</b></summary>
+
+Provided you've got the following sources.yaml
+
+```
+version: 2
+
+sources:
+  - name: raw_nyc_tripdata
+    database: "{{ env_var('DBT_BIGQUERY_PROJECT', 'dtc_zoomcamp_2025') }}"
+    schema:   "{{ env_var('DBT_BIGQUERY_SOURCE_DATASET', 'raw_nyc_tripdata') }}"
+    tables:
+      - name: ext_green_taxi
+      - name: ext_yellow_taxi
+```
+
+with the following env variables setup where `dbt` runs:
+
+```
+export DBT_BIGQUERY_PROJECT=myproject
+export DBT_BIGQUERY_DATASET=my_nyc_tripdata
+```
+
+What does this .sql model compile to?
+
+```SQL
+select * 
+from {{ source('raw_nyc_tripdata', 'ext_green_taxi' ) }}
+```
+
+
+<b>Answer:</b>
+
+Since the environment variables take precedence over the default value, the model would compile to:
+
+```SQL
+select *
+from myproject.raw_nyc_tripdata.ext_green_taxi
+```
+
+</details>
