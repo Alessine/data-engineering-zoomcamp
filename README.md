@@ -643,7 +643,7 @@ The following statements are therefore true:
 <details><summary><b>Question 5. Taxi Quarterly Revenue Growth</b></summary>
 
 <ol>
-    <li>Create a new model `fct_taxi_trips_quarterly_revenue.sql`</li>
+    <li>Create a new model <code>fct_taxi_trips_quarterly_revenue.sql</code></li>
     <li>Compute the Quarterly Revenues for each year for based on total_amount</li>
     <li>Compute the Quarterly YoY (Year-over-Year) revenue growth</li>
 </ol>
