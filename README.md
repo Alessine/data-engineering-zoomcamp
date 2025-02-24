@@ -592,3 +592,43 @@ Out of the given options, only the one that specifies the staging folder would n
 `dbt run --select models/staging/+`
 
 </details>
+
+<details><summary><b>Question 4. dbt Macros and Jinja</b></summary>
+
+Consider you're dealing with sensitive data (e.g.: PII), that is <b>only available to your team and very selected few individuals</b>, in the `raw layer` of your DWH (e.g: a specific BigQuery dataset or PostgreSQL schema),
+
+<ul>
+    <li>Among other things, you decide to obfuscate/masquerade that data through your staging models, and make it available in a different schema (a <code>staging layer</code>) for other Data/Analytics Engineers to explore</li>
+    <li>And <b>optionally</b>, yet another layer (<code>service layer</code>), where you'll build your dimension (<code>dim_</code>) and fact (<code>fct_</code>) tables (assuming the Star Schema dimensional modeling) for Dashboarding and for Tech Product Owners/Managers</li>
+</ul>
+
+You decide to make a macro to wrap a logic around it:
+
+```SQL
+{% macro resolve_schema_for(model_type) -%}
+
+    {%- set target_env_var = 'DBT_BIGQUERY_TARGET_DATASET'  -%}
+    {%- set stging_env_var = 'DBT_BIGQUERY_STAGING_DATASET' -%}
+
+    {%- if model_type == 'core' -%} {{- env_var(target_env_var) -}}
+    {%- else -%}                    {{- env_var(stging_env_var, env_var(target_env_var)) -}}
+    {%- endif -%}
+
+{%- endmacro %}
+```
+
+And use on your staging, dim_ and fact_ models as:
+
+```
+{{ config(
+    schema=resolve_schema_for('core'), 
+) }}
+```
+
+That all being said, regarding macro above, select all statements that are true to the models using it.
+
+<b>Answer:</b>
+
+
+
+</details>
