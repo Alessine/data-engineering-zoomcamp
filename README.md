@@ -625,10 +625,17 @@ And use on your staging, dim_ and fact_ models as:
 ) }}
 ```
 
-That all being said, regarding macro above, select all statements that are true to the models using it.
+That all being said, regarding macro above, <b>select all statements that are true to the models using it</b>.
 
 <b>Answer:</b>
 
+Since there is no default set for the environment variable `target_env_var`, it needs to be defined in the environment, otherwise the macro won't work. If this variable is set, then it will be used for any model that is defined as `core` (in this case `staging`, `dim_` and `fact_` models). All other models will use the value from `stging_env_var` and if undefined, will fall back to `target_env_var`.
 
+The following statements are therefore true:
+<ul>
+	<li>Setting a value for <code>DBT_BIGQUERY_TARGET_DATASET</code> env var is mandatory, or it'll fail to compile</li>
+	<li>When using <code>core</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
+	<li>When using <code>stg</code>, it materializes in the dataset defined in <code>DBT_BIGQUERY_STAGING_DATASET</code>, or defaults to <code>DBT_BIGQUERY_TARGET_DATASET</code></li>
+</ul>
 
 </details>
