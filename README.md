@@ -744,3 +744,56 @@ This is closest to this option from the homework assignment:
 <li>green: {p97: 55.0, p95: 45.0, p90: 26.5}, yellow: {p97: 31.5, p95: 25.5, p90: 19.0}</li>
 </ul>
 </details>
+
+<details><summary><b>Question 7. Top #Nth longest P90 travel time Location for FHV</b></summary>
+
+Prerequisites:
+
+<ul>
+    <li>Create a staging model for FHV Data (2019), and <b>DO NOT</b>b> add a deduplication step, just filter out the entries <code>where dispatching_base_num is not null</code></li>
+    <li>Create a core model for FHV Data (<code>dim_fhv_trips.sql</code>) joining with <code>dim_zones</code>.</li>
+    <li>Add some new dimensions <code>year</code> (e.g.: 2019) and <code>month</code> (e.g.: 1, 2, ..., 12), based on <code>pickup_datetime</code>, to the core model to facilitate filtering for your queries</li>
+</ul>
+
+Now...
+
+<ol>
+    <li>Create a new model <code>fct_fhv_monthly_zone_traveltime_p90.sql</code></li>
+	<li>For each record in <code>dim_fhv_trips.sql</code>, compute the timestamp_diff in seconds between dropoff_datetime and pickup_datetime - we'll call it <code>trip_duration</code> for this exercise</li>
+	<li>Compute the <b>continuous</b> <code>p90</code> of <code>trip_duration</code> partitioning by year, month, pickup_location_id, and dropoff_location_id</li>
+</ol>
+
+For the Trips that <b>respectively</b> started from <code>Newark Airport</code>, <code>SoHo</code>, and <code>Yorkville East</code>, in November 2019, what are <b>dropoff_zones</b> with the 2nd longest p90 trip_duration ?
+
+<b>Answer:</b>
+
+The file with the new model for the `P90` continuous percentiles is [here](module_4/homework/models/core/fct_fhv_monthly_zone_traveltime_p90.sql).
+
+Query:
+```SQL
+SELECT
+  *
+FROM (
+  SELECT
+    *,
+    ROW_NUMBER() OVER(PARTITION BY month, year, pickup_zone ORDER BY P90 DESC) AS row_number
+  FROM
+    `dez-2025.taxi_data_prod.fct_fhv_monthly_zone_traveltime_p90`
+  WHERE
+    year = 2019
+    AND month = 11
+    AND pickup_zone IN ("Newark Airport",
+      "SoHo",
+      "Yorkville East"))
+WHERE
+  row_number < 3;
+```
+
+I'm getting the following output:
+![percentile query output](./module_4/homework/hw4_q7.png)
+
+Therefore, the correct answer is:
+<ul>
+<li>LaGuardia Airport, Chinatown, Garment District</li>
+</ul>
+</details>
