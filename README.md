@@ -508,7 +508,7 @@ Result:
 ## Module 4: Analytics Engineering
 
 ### Learning in Public
-I'm documenting my learning in a Medium article (coming soon).
+I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-analytics-engineering-and-dbt-6e72358783ed).
 
 ### Homework
 
