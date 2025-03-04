@@ -7,7 +7,12 @@
 ### dotenv ###
 .env
 
+### Spark ###
+*jdk*
+*spark-3.3.2*
+
 ### data ###
+*/data*
 module_1/*/*.csv
 *.gz
 */ny_taxi_postgres_data/*
