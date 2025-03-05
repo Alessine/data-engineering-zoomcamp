@@ -28,3 +28,31 @@ spark-submit \
 # Stopping the workers and master - go to spark directory
 ./sbin/stop-worker.sh
 ./sbin/stop-master.sh
+
+# In dataproc UI
+--input_green=gs://taxi-data-files/pq/green/2021/*/
+--input_yellow=gs://taxi-data-files/pq/yellow/2021/*/
+--output=gs://taxi-data-files/report-2021
+
+# gcloud-sdk dataproc job
+gcloud config set project dez-2025
+
+# Saving to GCS
+gcloud dataproc jobs submit pyspark \
+    --cluster=dez-cluster \
+    --region=europe-west6 \
+    gs://taxi-data-files/code/250305_spark_google_cloud.py \
+    -- \
+        --input_green=gs://taxi-data-files/pq/green/2021/*/ \
+        --input_yellow=gs://taxi-data-files/pq/yellow/2021/*/ \
+        --output=gs://taxi-data-files/report-2021
+
+# Writing to BigQuery
+gcloud dataproc jobs submit pyspark \
+    --cluster=dez-cluster \
+    --region=europe-west6 \
+    gs://taxi-data-files/code/250305_spark_bigquery.py \
+    -- \
+        --input_green=gs://taxi-data-files/pq/green/2020/*/ \
+        --input_yellow=gs://taxi-data-files/pq/yellow/2020/*/ \
+        --output=taxi_data.reports_2020
