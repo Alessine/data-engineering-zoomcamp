@@ -8,3 +8,23 @@ export PATH="${SPARK_HOME}/bin:${PATH}"
 
 export PYTHONPATH="${SPARK_HOME}/python/:$PYTHONPATH"
 export PYTHONPATH="${SPARK_HOME}/python/lib/py4j-0.10.9.5-src.zip:$PYTHONPATH"
+
+# Running Spark
+
+python 250305_spark_google_cloud.py \ 
+    --input_green=./data/pq/green/2020/*/ \ 
+    --input_yellow=./data/pq/yellow/2020/*/ \
+    --output=./data/report-2020
+
+URL="spark://angela-HP-EliteBook-850-G8-Notebook-PC:7077"
+
+spark-submit \
+    --master="${URL}" \
+    250305_spark_google_cloud.py \
+        --input_green=./data/pq/green/2021/*/ \
+        --input_yellow=./data/pq/yellow/2021/*/ \
+        --output=./data/report-2021
+
+# Stopping the workers and master - go to spark directory
+./sbin/stop-worker.sh
+./sbin/stop-master.sh
