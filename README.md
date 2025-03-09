@@ -887,6 +887,7 @@ Spark’s User Interface which shows the application's dashboard runs on which l
 
 <b>Answer:</b>
 
+It runs on `localhost:4040`.
 
 </details>
 
@@ -902,5 +903,22 @@ Using the zone lookup data and the Yellow October 2024 data, what is the name of
 
 <b>Answer:</b>
 
+Query:
+```SQL
+SELECT
+    Zone,
+    COUNT(*) AS trip_count
+    FROM
+        yellow_taxis_zones_joined
+    GROUP BY
+        Zone
+    ORDER BY
+        trip_count
+    LIMIT 5;
+```
+
+Output:
+
+![least frequent pickup zone query output](./module_5/homework/hw5_q6.png)
 
 </details>
