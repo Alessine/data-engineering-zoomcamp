@@ -750,7 +750,7 @@ This is closest to this option from the homework assignment:
 Prerequisites:
 
 <ul>
-    <li>Create a staging model for FHV Data (2019), and <b>DO NOT</b>b> add a deduplication step, just filter out the entries <code>where dispatching_base_num is not null</code></li>
+    <li>Create a staging model for FHV Data (2019), and <b>DO NOT</b> add a deduplication step, just filter out the entries <code>where dispatching_base_num is not null</code></li>
     <li>Create a core model for FHV Data (<code>dim_fhv_trips.sql</code>) joining with <code>dim_zones</code>.</li>
     <li>Add some new dimensions <code>year</code> (e.g.: 2019) and <code>month</code> (e.g.: 1, 2, ..., 12), based on <code>pickup_datetime</code>, to the core model to facilitate filtering for your queries</li>
 </ul>
@@ -797,3 +797,26 @@ Therefore, the correct answer is:
 <li>LaGuardia Airport, Chinatown, Garment District</li>
 </ul>
 </details>
+
+## Module 5: Batch Processing and Spark
+
+### Learning in Public
+I'm documenting my learning in a Medium article (coming soon).
+
+### Homework
+
+<details><summary><b>Question 1. Install Spark and PySpark</b></summary>
+
+<ul>
+	- Install Spark
+	- Run PySpark
+	- Create a local spark session
+	- Execute spark.version
+<ul/>
+
+What's the output?
+
+<b>Answer:</b>
+
+</details>
+
