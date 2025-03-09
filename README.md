@@ -805,7 +805,7 @@ I'm documenting my learning in a Medium article (coming soon).
 
 ### Homework
 
-The code related to all these questions is in this [notebook](./module_5/homework/250309_homework).
+The code related to all these questions is in this [notebook](./module_5/homework/250309_homework.ipynb).
 
 <details><summary><b>Question 1. Install Spark and PySpark</b></summary>
 
@@ -839,6 +839,7 @@ All four files have a size of about 25.4 MB.
 How many taxi trips were there on the 15th of October? Consider only trips that started on the 15th of October.
 
 <b>Answer:</b>
+
 Query:
 ```SQL
 SELECT 
@@ -852,9 +853,8 @@ WHERE
 ```
 
 Output:
+
 ![trip count query output](./module_5/homework/hw5_q3.png)
-
-
 
 </details>
 
@@ -864,6 +864,20 @@ What is the length of the longest trip in the dataset in hours?
 
 <b>Answer:</b>
 
+Query:
+```SQL
+SELECT
+    MAX(trip_duration) as max_trip_duration
+    FROM
+        (SELECT
+            TIMESTAMPDIFF(HOUR, tpep_pickup_datetime, tpep_dropoff_datetime) AS trip_duration
+        FROM
+            yellow_taxis_oct_24);
+```
+
+Output:
+
+![longest trip query output](./module_5/homework/hw5_q4.png)
 
 </details>
 
