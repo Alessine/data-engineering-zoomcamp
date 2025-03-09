@@ -805,7 +805,7 @@ I'm documenting my learning in a Medium article (coming soon).
 
 ### Homework
 
-The code related to all these questions is in this [notebook](./module_5/notebooks/250309_homework).
+The code related to all these questions is in this [notebook](./module_5/homework/250309_homework).
 
 <details><summary><b>Question 1. Install Spark and PySpark</b></summary>
 
@@ -839,6 +839,21 @@ All four files have a size of about 25.4 MB.
 How many taxi trips were there on the 15th of October? Consider only trips that started on the 15th of October.
 
 <b>Answer:</b>
+Query:
+```SQL
+SELECT 
+    MIN(tpep_pickup_datetime) AS first_trip,
+    MAX(tpep_pickup_datetime) AS last_trip,
+    COUNT(*) trip_count
+FROM 
+    yellow_taxis_oct_24
+WHERE
+    date(tpep_pickup_datetime) == '2024-10-15'
+```
+
+Output:
+![trip count query output](./module_5/homework/hw5_q3.png)
+
 
 
 </details>
