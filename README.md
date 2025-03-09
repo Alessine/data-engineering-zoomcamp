@@ -807,16 +807,69 @@ I'm documenting my learning in a Medium article (coming soon).
 
 <details><summary><b>Question 1. Install Spark and PySpark</b></summary>
 
-<ul>
-	- Install Spark
-	- Run PySpark
-	- Create a local spark session
-	- Execute spark.version
-<ul/>
+- Install Spark
+- Run PySpark
+- Create a local spark session
+- Execute spark.version
 
 What's the output?
 
 <b>Answer:</b>
 
+
 </details>
 
+<details><summary><b>Question 2. Yellow October 2024</b></summary>
+
+Read the October 2'24 Yellow Taxi Data into a Spark Dataframe.
+
+Repartition the Dataframe into 4 partitions and save it to parquet.
+
+What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)?
+
+<b>Answer:</b>
+
+
+</details>
+
+<details><summary><b>Question 3. Count records</b></summary>
+
+How many taxi trips were there on the 15th of October? Consider only trips that started on the 15th of October.
+
+<b>Answer:</b>
+
+
+</details>
+
+<details><summary><b>Question 4. Longest trip</b></summary>
+
+What is the length of the longest trip in the dataset in hours?
+
+<b>Answer:</b>
+
+
+</details>
+
+<details><summary><b>Question 5. User Interface</b></summary>
+
+Spark’s User Interface which shows the application's dashboard runs on which local port?
+
+<b>Answer:</b>
+
+
+</details>
+
+<details><summary><b>Question 6. Least frequent pickup location zone</b></summary>
+
+Load the zone lookup data into a temp view in Spark:
+
+```
+wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
+```
+
+Using the zone lookup data and the Yellow October 2024 data, what is the name of the LEAST frequent pickup location Zone?
+
+<b>Answer:</b>
+
+
+</details>
