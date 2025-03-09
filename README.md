@@ -805,6 +805,8 @@ I'm documenting my learning in a Medium article (coming soon).
 
 ### Homework
 
+The code related to all these questions is in this [notebook](./module_5/notebooks/250309_homework).
+
 <details><summary><b>Question 1. Install Spark and PySpark</b></summary>
 
 - Install Spark
@@ -816,19 +818,19 @@ What's the output?
 
 <b>Answer:</b>
 
+The output is: `3.3.2`.
 
 </details>
 
 <details><summary><b>Question 2. Yellow October 2024</b></summary>
 
-Read the October 2'24 Yellow Taxi Data into a Spark Dataframe.
-
-Repartition the Dataframe into 4 partitions and save it to parquet.
+Read the October 2'24 Yellow Taxi Data into a Spark Dataframe. Repartition the Dataframe into 4 partitions and save it to parquet.
 
 What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)?
 
 <b>Answer:</b>
 
+All four files have a size of about 25.4 MB.
 
 </details>
 
@@ -863,7 +865,7 @@ Spark’s User Interface which shows the application's dashboard runs on which l
 
 Load the zone lookup data into a temp view in Spark:
 
-```
+```bash
 wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
 ```
 
