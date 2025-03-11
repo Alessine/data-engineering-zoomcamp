@@ -801,7 +801,7 @@ Therefore, the correct answer is:
 ## Module 5: Batch Processing and Spark
 
 ### Learning in Public
-I'm documenting my learning in a Medium article (coming soon).
+I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-batch-processing-and-spark-ec7e48addf8a).
 
 ### Homework
 
