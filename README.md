@@ -922,3 +922,123 @@ Output:
 ![least frequent pickup zone query output](./module_5/homework/hw5_q6.png)
 
 </details>
+
+
+## Module 5: Streaming with Kafka and PyFlink
+
+### Learning in Public
+I'm documenting my learning in a Medium article (coming soon).
+
+### Homework
+
+<details><summary><b>Question 1. Redpanda version</b></summary>
+
+Let's find out the version of redpandas. For that, check the output of the command `rpk help` inside the container. The name of the container is `redpanda-1`. Find out what you need to execute based on the `help` output.
+
+What's the version, based on the output of the command you executed? (copy the entire version)
+
+<b>Answer:</b>
+
+
+</details>
+
+<details><summary><b>Question 2. Yellow October 2024</b></summary>
+
+Read the October 2'24 Yellow Taxi Data into a Spark Dataframe. Repartition the Dataframe into 4 partitions and save it to parquet.
+
+What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)?
+
+<b>Answer:</b>
+
+All four files have a size of about 25.4 MB.
+
+</details>
+
+<details><summary><b>Question 3. Count records</b></summary>
+
+How many taxi trips were there on the 15th of October? Consider only trips that started on the 15th of October.
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT 
+    MIN(tpep_pickup_datetime) AS first_trip,
+    MAX(tpep_pickup_datetime) AS last_trip,
+    COUNT(*) trip_count
+FROM 
+    yellow_taxis_oct_24
+WHERE
+    date(tpep_pickup_datetime) == '2024-10-15'
+```
+
+Output:
+
+![trip count query output](./module_5/homework/hw5_q3.png)
+
+</details>
+
+<details><summary><b>Question 4. Longest trip</b></summary>
+
+What is the length of the longest trip in the dataset in hours?
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+    MAX(trip_duration) as max_trip_duration
+    FROM
+        (SELECT
+            TIMESTAMPDIFF(HOUR, tpep_pickup_datetime, tpep_dropoff_datetime) AS trip_duration
+        FROM
+            yellow_taxis_oct_24);
+```
+
+Output:
+
+![longest trip query output](./module_5/homework/hw5_q4.png)
+
+</details>
+
+<details><summary><b>Question 5. User Interface</b></summary>
+
+Spark’s User Interface which shows the application's dashboard runs on which local port?
+
+<b>Answer:</b>
+
+It runs on `localhost:4040`.
+
+</details>
+
+<details><summary><b>Question 6. Least frequent pickup location zone</b></summary>
+
+Load the zone lookup data into a temp view in Spark:
+
+```bash
+wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
+```
+
+Using the zone lookup data and the Yellow October 2024 data, what is the name of the LEAST frequent pickup location Zone?
+
+<b>Answer:</b>
+
+Query:
+```SQL
+SELECT
+    Zone,
+    COUNT(*) AS trip_count
+    FROM
+        yellow_taxis_zones_joined
+    GROUP BY
+        Zone
+    ORDER BY
+        trip_count
+    LIMIT 5;
+```
+
+Output:
+
+![least frequent pickup zone query output](./module_5/homework/hw5_q6.png)
+
+</details>
