@@ -951,6 +951,13 @@ What's the output of the command for creating a topic? Include the entire output
 
 <b>Answer:</b>
 
+When I run `rpk topic create green-trips` I get the following output:
+
+
+|TOPIC |STATUS|
+|---|---|
+|green-trips |OK|
+
 
 </details>
 
