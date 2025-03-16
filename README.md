@@ -942,15 +942,14 @@ What's the version, based on the output of the command you executed? (copy the e
 
 </details>
 
-<details><summary><b>Question 2. Yellow October 2024</b></summary>
+<details><summary><b>Question 2. Creating a topic</b></summary>
 
-Read the October 2'24 Yellow Taxi Data into a Spark Dataframe. Repartition the Dataframe into 4 partitions and save it to parquet.
+Before we can send data to the redpanda server, we need to create a topic. We do it also with the `rpk` command we used previously for figuring out the version of redpandas. Read the output of `help` and based on it, create a topic with name `green-trips`.
 
-What is the average size of the Parquet (ending with .parquet extension) Files that were created (in MB)?
+What's the output of the command for creating a topic? Include the entire output in your answer.
 
 <b>Answer:</b>
 
-All four files have a size of about 25.4 MB.
 
 </details>
 
