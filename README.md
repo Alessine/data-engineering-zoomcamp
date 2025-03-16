@@ -997,7 +997,7 @@ Provided that you can connect to the server, what's the output of the last comma
 
 <b>Answer:</b>
 
-
+When I run this code in a Jupyter Notebook, I get the output `True`.
 
 </details>
 
