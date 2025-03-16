@@ -997,7 +997,7 @@ Provided that you can connect to the server, what's the output of the last comma
 
 <b>Answer:</b>
 
-
+When I run this code in a Jupyter Notebook, I get the output `True`.
 
 </details>
 
@@ -1045,7 +1045,7 @@ How much time did it take to send the entire dataset and flush?
 
 <b>Answer:</b>
 
-
+Sending the data took 33.7 seconds. The code can be accessed [here](./module_6/homework/250316_connecting_to_kafka.ipynb).
 
 </details>
 
