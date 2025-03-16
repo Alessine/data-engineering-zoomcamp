@@ -939,6 +939,7 @@ What's the version, based on the output of the command you executed? (copy the e
 
 <b>Answer:</b>
 
+When running `rpk --version` inside the redpandas docker container, I get the following output: `rpk version v24.2.18 (rev f9a22d4430)`.
 
 </details>
 
