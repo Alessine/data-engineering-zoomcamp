@@ -993,67 +993,69 @@ Provided that you can connect to the server, what's the output of the last comma
 
 </details>
 
-<details><summary><b>Question 4. Longest trip</b></summary>
+<details><summary><b>Question 4. Sending the Trip Data</b></summary>
 
-What is the length of the longest trip in the dataset in hours?
+Now we need to send the data to the green-trips topic. Read the data, and keep only these columns:
+<ul>
+    <li><code>'lpep_pickup_datetime'</code>,</li>
+    <li><code>'lpep_dropoff_datetime'</code>,</li>
+    <li><code>'PULocationID'</code>,</li>
+    <li><code>'DOLocationID'</code>,</li>
+    <li><code>'passenger_count'</code>,</li>
+    <li><code>'trip_distance'</code>,</li>
+    <li><code>'tip_amount'</code></li>
+</ul>
+
+Now send all the data using this code:
+
+```python
+producer.send(topic_name, value=message)
+```
+
+For each row (`message`) in the dataset. In this case, `message` is a dictionary.
+
+After sending all the messages, flush the data:
+
+```python
+producer.flush()
+```
+
+Use `from time import time` to see the total time
+
+```python
+from time import time
+
+t0 = time()
+
+# ... your code
+
+t1 = time()
+took = t1 - t0
+```
+
+How much time did it take to send the entire dataset and flush?
 
 <b>Answer:</b>
 
-Query:
-```SQL
-SELECT
-    MAX(trip_duration) as max_trip_duration
-    FROM
-        (SELECT
-            TIMESTAMPDIFF(HOUR, tpep_pickup_datetime, tpep_dropoff_datetime) AS trip_duration
-        FROM
-            yellow_taxis_oct_24);
-```
 
-Output:
-
-![longest trip query output](./module_5/homework/hw5_q4.png)
 
 </details>
 
-<details><summary><b>Question 5. User Interface</b></summary>
+<details><summary><b>Question 5. Build a Sessionization Window</b></summary>
 
-Spark’s User Interface which shows the application's dashboard runs on which local port?
+Now we have the data in the Kafka stream. It's time to process it.
 
-<b>Answer:</b>
+<ul>
+    <li>Copy <code>aggregation_job.py</code> and rename it to <code>session_job.py</code></li>
+    <li>Have it read from <code>green-trips</code> fixing the schema</li>
+    <li>Use a session window with a gap of 5 minutes</li>
+    <li>Use <code>lpep_dropoff_datetime</code> time as your watermark with a 5 second tolerance</li>
+</ul>
 
-It runs on `localhost:4040`.
-
-</details>
-
-<details><summary><b>Question 6. Least frequent pickup location zone</b></summary>
-
-Load the zone lookup data into a temp view in Spark:
-
-```bash
-wget https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv
-```
-
-Using the zone lookup data and the Yellow October 2024 data, what is the name of the LEAST frequent pickup location Zone?
+Which pickup and drop off locations have the longest unbroken streak of taxi trips?
 
 <b>Answer:</b>
 
-Query:
-```SQL
-SELECT
-    Zone,
-    COUNT(*) AS trip_count
-    FROM
-        yellow_taxis_zones_joined
-    GROUP BY
-        Zone
-    ORDER BY
-        trip_count
-    LIMIT 5;
-```
 
-Output:
-
-![least frequent pickup zone query output](./module_5/homework/hw5_q6.png)
 
 </details>
