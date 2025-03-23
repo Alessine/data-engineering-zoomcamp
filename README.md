@@ -1,14 +1,19 @@
 # Data Engineering Zoomcamp Cohort 2025
 
-This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp).
+## Learning in Public
 
+This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp). I published an article on Medium after completing each module to reflect on the contents. Here's an overview:
 
-## Module 1: Docker, SQL, Terraform
+- Module 1: [Docker, SQL, Terraform](https://medium.com/@angelaniederberger/learning-in-public-docker-gcp-and-terraform-e5282f6f9d1b)
+- Module 2: [Orchestration with Kestra](https://medium.com/@angelaniederberger/learning-in-public-orchestration-with-kestra-0ec485da063e)
+- Module 3: [Data Warehouse](https://medium.com/@angelaniederberger/learning-in-public-data-warehouse-and-bigquery-58ceb162edd4)
+- Module 4: [Analytics Engineering](https://medium.com/@angelaniederberger/learning-in-public-analytics-engineering-and-dbt-6e72358783ed)
+- Module 5: [Batch Processing and Spark](https://medium.com/@angelaniederberger/learning-in-public-batch-processing-and-spark-ec7e48addf8a)
+- Module 6: [Streaming with Kafka and Flink](https://medium.com/@angelaniederberger/learning-in-public-data-streaming-with-kafka-and-flink-5f84629525ee)
 
-### Learning in Public
-I documented my learning in a [Medium article](https://medium.com/@angelaniederberger/e5282f6f9d1b).
+## Homework
 
-### Homework
+### Module 1: Docker, SQL, Terraform
 
 <details><summary><b>Question 1. Understanding docker first run</b></summary>
 
@@ -192,12 +197,7 @@ $ terraform destroy
 </details>
 
 
-## Module 2: Orchestration with Kestra
-
-### Learning in Public
-I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-orchestration-with-kestra-0ec485da063e).
-
-### Homework
+### Module 2: Orchestration with Kestra
 
 <details><summary><b>Question 1. File Size</b></summary>
 
@@ -298,12 +298,7 @@ In the [Kestra Documentation on Schedule Triggers](https://kestra.io/docs/workfl
 </details>
 
 
-## Module 3: Data Warehouse
-
-### Learning in Public
-I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-data-warehouse-and-bigquery-58ceb162edd4).
-
-### Homework
+### Module 3: Data Warehouse
 
 Queries used for setting up the tables:
 
@@ -505,12 +500,7 @@ Result:
 
 </details>
 
-## Module 4: Analytics Engineering
-
-### Learning in Public
-I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-analytics-engineering-and-dbt-6e72358783ed).
-
-### Homework
+### Module 4: Analytics Engineering
 
 <details><summary><b>Question 1. Understanding dbt model resolution</b></summary>
 
@@ -798,12 +788,7 @@ Therefore, the correct answer is:
 </ul>
 </details>
 
-## Module 5: Batch Processing and Spark
-
-### Learning in Public
-I documented my learning in this [Medium article](https://medium.com/@angelaniederberger/learning-in-public-batch-processing-and-spark-ec7e48addf8a).
-
-### Homework
+### Module 5: Batch Processing and Spark
 
 The code related to all these questions is in this [notebook](./module_5/homework/250309_homework.ipynb).
 
@@ -924,12 +909,7 @@ Output:
 </details>
 
 
-## Module 5: Streaming with Kafka and PyFlink
-
-### Learning in Public
-I'm documenting my learning in a Medium article (coming soon).
-
-### Homework
+### Module 6: Streaming with Kafka and Flink
 
 <details><summary><b>Question 1. Redpanda version</b></summary>
 
