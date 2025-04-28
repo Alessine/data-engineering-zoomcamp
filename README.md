@@ -1,5 +1,10 @@
 # Data Engineering Zoomcamp Cohort 2025
 
+## Final Project
+
+For the Final Project, I built an End-to-End Data Pipeline to extract, load, transform and visualize air quality data from the Open Data Catalog by the City of Zurich. 
+You can find all the related materials [here](https://github.com/Alessine/zurich_air_quality).
+
 ## Learning in Public
 
 This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp). I published an article on Medium after completing each module to reflect on the contents. Here's an overview:
