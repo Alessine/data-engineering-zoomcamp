@@ -1,5 +1,7 @@
 # Data Engineering Zoomcamp Cohort 2025
 
+This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp). 
+
 ## Final Project
 
 For the Final Project, I built an End-to-End Data Pipeline to extract, load, transform and visualize air quality data from the Open Data Catalog by the City of Zurich. 
@@ -7,7 +9,7 @@ You can find all the related materials [here](https://github.com/Alessine/zurich
 
 ## Learning in Public
 
-This repo contains all my materials, notes and homework for the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp). I published an article on Medium after completing each module to reflect on the contents. Here's an overview:
+I published an article on Medium after completing each module to reflect on the contents. Here's an overview:
 
 - Module 1: [Docker, SQL, Terraform](https://medium.com/@angelaniederberger/learning-in-public-docker-gcp-and-terraform-e5282f6f9d1b)
 - Module 2: [Orchestration with Kestra](https://medium.com/@angelaniederberger/learning-in-public-orchestration-with-kestra-0ec485da063e)
